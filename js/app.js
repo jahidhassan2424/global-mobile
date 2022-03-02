@@ -22,8 +22,10 @@ const loadAllMobile = searchText => {
 }
 
 const searchButton = () => {
+    document.getElementById('header').style.display = 'none';
+    document.getElementById('spinner-section').style.display = 'block';
     const searchText = get('search-field').value;
-    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
+    // document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
     get('search-field').value = '';
     clear('output-result');
     clear('phoneDetails');
@@ -32,6 +34,10 @@ const searchButton = () => {
 
 // Show all result Function starts
 const showAllResult = data => {
+
+    document.getElementById('header').style.display = 'block';
+    document.getElementById('spinner-section').style.display = 'none';
+    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
     console.log(data.data);
     const phones = data.data
     let count = phones.length

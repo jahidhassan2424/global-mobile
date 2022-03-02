@@ -1,5 +1,5 @@
-#show-all-button{
-    display:block;
+#spinner-section{
+    display:none;
 }
 table {
     border: 2px solid rgb(144, 135, 135);
@@ -10,7 +10,7 @@ table {
 }
 td,th {
     border: 1px solid grey;
-    margin: 5px 70%  ;
+    margin: 5px 70%    ;
     text-align: left;
     padding-left:10px;
 }
