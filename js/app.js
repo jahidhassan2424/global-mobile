@@ -150,7 +150,6 @@ const showPhoneDetails = phone => {
         radio = phone.data.others.Radio;
         usb = phone.data.others.USB;
         wlan = phone.data.others.WLAN;
-        console.log('Other is available');
         others = phone.data.others;
         // bluetooth === "" ? bluetooth = 'No Data Found' : bluetooth = phone.data.others.Bluetooth;
     }
