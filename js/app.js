@@ -55,9 +55,9 @@ const showAllResult = data => {
             let count = 0;
             if (count < 20) {
                 const div = document.createElement('div');
-                div.classList = 'col col-4';
+                div.classList = 'col col-12 col-md-4 col-sm-6';
                 div.innerHTML = `
-                <div class="card h-100">
+                <div class="card h-100 card-img">
                     <img width="100%" src="${data.data[i].image}" class="m-auto p-5" alt="...">
                     <div class="card-body text-center">
                         <h5 class="card-title">${data.data[i].phone_name}</h5>
@@ -117,6 +117,14 @@ const showPhoneDetails = phone => {
     let radio = 'No Data Found';
     let usb = 'No Data Found';
     let wlan = 'No Data Found';
+    let sensor = phone.data.mainFeatures.sensors;
+    let sensorSliced = sensor.slice(0, 1);
+    let sensorSliced2 = sensor.slice(1, 2);
+    let sensorSliced3 = sensor.slice(2, 3);
+    let sensorSliced4 = sensor.slice(3, 4);
+    let sensorSliced5 = sensor.slice(4, 5);
+    let sensorSliced6 = sensor.slice(5, 6);
+    console.log('Slice Result:', sensor.slice(0, 4));
 
     if (others === undefined) {
         others = 'No Data Found';
@@ -139,12 +147,12 @@ const showPhoneDetails = phone => {
 
     const div = document.createElement('div');
     div.innerHTML = `
-        <div style="display:flex; flex-direction: row;align-items:center; justify-content:center; ">
-            <div class="">
+        <div class="d-flex flex-md-row flex-column align-items-center w-full" style="  justify-content:center; width:cover">
+            <div class="mb-md-3 mb-0 ">
                 <img src="${phone.data.image}" alt="">
             </div>
             <div class="px-3">
-                <table >
+                <table class="w-full">
                 <tr>
                     <th>Name </th>
                     <td>${phone.data.name}</td>
@@ -154,7 +162,7 @@ const showPhoneDetails = phone => {
                     <td> ${phone.data.brand}</td>
                 </tr>
                 <tr>
-                    <th>Release Date</th>
+ 			<th>Release Date</th>
                     <td> ${releaseDate}</td>
                 </tr>
                 <tr  >
@@ -165,52 +173,67 @@ const showPhoneDetails = phone => {
                     <td> ${phone.data.mainFeatures.storage}</td>
                 </tr>
                 <tr>
-                    <th ">Display Size</th>
+                    <th >Display Size</th>
                     <td> ${phone.data.mainFeatures.displaySize}</td>
                 </tr>
                 <tr>
-                    <th ">ChipSet</th>
+                    <th >ChipSet</th>
                     <td> ${phone.data.mainFeatures.chipSet}</td>
                 </tr>
                 <tr>
-                    <th ">Memory</th>
+                    <th >Memory</th>
                     <td> ${phone.data.mainFeatures.memory}</td>
                 </tr>
-                <tr>
-                    <th ">Sensors</th>
-                    <td> ${phone.data.mainFeatures.sensors}</td>
+                <tr >
+                    <th rowspan="6" >Sensor</th>
+                    <td> ${sensorSliced}</td>
                 </tr>
+                <tr >
+                    <td> ${sensorSliced2}</td>
+                </tr>
+                <tr >
+                    <td> ${sensorSliced3}</td>
+                </tr>
+                <tr >
+                    <td> ${sensorSliced4}</td>
+                </tr>
+                <tr >
+                    <td> ${sensorSliced5}</td>
+                </tr>
+                <tr >
+                    <td> ${sensorSliced6}</td>
+                </tr>
+                
                 <tr  >
                     <td class="center-text" colspan="2">Other Features</td>
                 </tr> 
                 <tr>
-                    <th ">Bluetooth:</th>
+                    <th >Bluetooth</th>
                     <td> ${bluetooth}</td>
                 </tr>
                 <tr>
-                    <th ">GPS:</th>
+                    <th >GPS</th>
                     <td> ${gps}</td>
                 </tr>
                 <tr>
-                    <th ">NFC:</th>
+                    <th >NFC</th>
                     <td> ${nfc}</td>
                 </tr>
                 <tr>
-                    <th ">Radio:</th>
+                    <th >Radio</th>
                     <td> ${radio}</td>
                 </tr>
                 <tr>
-                    <th ">USB:</th>
+                    <th >USB</th>
                     <td> ${usb}</td>
                 </tr>
                 <tr>
-                    <th ">WLAN:</th>
+                    <th >WLAN</th>
                     <td> ${wlan}</td>
                 </tr>
-               
-            
-
+                
                 </table>
+                
             </div>
         </div>
     

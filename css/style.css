@@ -1,3 +1,35 @@
 #show-all-button{
     display:block;
 }
+table {
+    border: 2px solid rgb(144, 135, 135);
+    border-radius: 80px;
+    text-align: left;
+    width: 90%;
+    margin: auto;
+}
+td,th {
+    border: 1px solid grey;
+    margin: 5px 70%  ;
+    text-align: left;
+    padding-left:10px;
+}
+
+
+.center-text {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 0;
+}
+.card {
+    border-radius: 20px;
+    transition: all .2s;
+   
+  
+}
+}
+.card:hover {
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px 5px #888888;
+}
