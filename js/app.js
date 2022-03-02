@@ -13,6 +13,7 @@ const clear = name => {
     return get(name).textContent = '';
 }
 
+
 const loadAllMobile = searchText => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
@@ -25,6 +26,7 @@ const searchButton = () => {
     document.getElementById('header').style.display = 'none';
     document.getElementById('spinner-section').style.display = 'block';
     const searchText = get('search-field').value;
+    searchTextGlobal = searchText.toLowerCase();
     // document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
     get('search-field').value = '';
     clear('output-result');
@@ -34,10 +36,9 @@ const searchButton = () => {
 
 // Show all result Function starts
 const showAllResult = data => {
-
     document.getElementById('header').style.display = 'block';
     document.getElementById('spinner-section').style.display = 'none';
-    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
+    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchTextGlobal}"`;
     console.log(data.data);
     const phones = data.data
     let count = phones.length
@@ -103,6 +104,8 @@ const showAllResult = data => {
 
 // Load Phone Details
 const loadPhoneDetails = phoneId => {
+    document.getElementById('phoneDetails').style.display = 'none';
+    document.getElementById('spinner-section').style.display = 'block';
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     fetch(url)
         .then(res => res.json())
@@ -112,6 +115,7 @@ const loadPhoneDetails = phoneId => {
 // Show Phone Details
 
 const showPhoneDetails = phone => {
+
     clear('phoneDetails');
     console.log('Phone:', phone);
     // console.log(phone.data.slug);
@@ -131,7 +135,8 @@ const showPhoneDetails = phone => {
     let sensorSliced5 = sensor.slice(4, 5);
     let sensorSliced6 = sensor.slice(5, 6);
     console.log('Slice Result:', sensor.slice(0, 4));
-
+    document.getElementById('phoneDetails').style.display = 'block';
+    document.getElementById('spinner-section').style.display = 'none';
     if (others === undefined) {
         others = 'No Data Found';
         console.log('Other is undefined');
