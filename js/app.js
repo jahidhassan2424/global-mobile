@@ -33,15 +33,17 @@ const searchButton = () => {
     clear('phoneDetails');
     loadAllMobile(searchText);
 }
+let showAllButtonSavedDataGlobal = 0;
 
 // Show all result Function starts
 const showAllResult = data => {
+    showAllButtonSavedDataGlobal = data;
     document.getElementById('header').style.display = 'block';
     document.getElementById('spinner-section').style.display = 'none';
     document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchTextGlobal}"`;
     console.log(data.data);
-    const phones = data.data
-    let count = phones.length
+    const phones = data.data;
+    let count = phones.length;
 
     if (count === 0) {
         clear('nothing-found');
@@ -78,6 +80,7 @@ const showAllResult = data => {
                 count++;
             }
         }
+        document.getElementById('show-all-btn').style.display = "block";
     }
     else {
         clear('nothing-found');
@@ -112,7 +115,7 @@ const loadPhoneDetails = phoneId => {
         .then(data => showPhoneDetails(data));
 }
 
-// Show Phone Details
+// Show Phone Details starts
 
 const showPhoneDetails = phone => {
 
@@ -141,8 +144,6 @@ const showPhoneDetails = phone => {
         others = 'No Data Found';
         console.log('Other is undefined');
     }
-
-
     else {
         bluetooth = phone.data.others.Bluetooth;
         gps = phone.data.others.GPS;
@@ -151,7 +152,6 @@ const showPhoneDetails = phone => {
         usb = phone.data.others.USB;
         wlan = phone.data.others.WLAN;
         others = phone.data.others;
-        // bluetooth === "" ? bluetooth = 'No Data Found' : bluetooth = phone.data.others.Bluetooth;
     }
     releaseDate === "" ? releaseDate = 'No Data Found' : releaseDate = phone.data.releaseDate;
 
@@ -250,5 +250,29 @@ const showPhoneDetails = phone => {
     `;
     get('phoneDetails').appendChild(div);
 
+}
+// Show Phone Details Ends
+const showAllbutton = () => {
+    clear('nothing-found');
+    clear('output-result');
+    document.getElementById('show-all-btn').style.display = "none";
+    const phones = showAllButtonSavedDataGlobal.data;
+    phones.forEach(element => {
+        const div = document.createElement('div');
+        div.classList = 'col col-12 col-md-4 col-sm-6';
+        div.innerHTML = `
+                <div class="card h-100">
+                    <img width="100%" src="${element.image}" class="m-auto p-5" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">${element.phone_name}</h5>
+                        <p class="">Brand: ${element.brand} </p>
+                        <a href="#"><button class="btn btn-primary fw-bold " onclick="loadPhoneDetails('${element.slug}')">Details</button></a>
+                    </div>
+                </div>
+            `;
+        const output = get('output-result');
+        output.appendChild(div);
+    })
+    // console.log(showAllButtonSavedDataGlobal);
 }
 
