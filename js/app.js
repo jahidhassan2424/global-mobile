@@ -23,9 +23,10 @@ const loadAllMobile = searchText => {
 
 const searchButton = () => {
     const searchText = get('search-field').value;
-    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText}"`;
+    document.getElementById('showing-search-result-for').innerHTML = `Showing search result for <span ></span>"${searchText.toLowerCase()}"`;
     get('search-field').value = '';
     clear('output-result');
+    clear('phoneDetails');
     loadAllMobile(searchText);
 }
 
@@ -106,14 +107,35 @@ const loadPhoneDetails = phoneId => {
 
 const showPhoneDetails = phone => {
     clear('phoneDetails');
-    console.log(phone);
+    console.log('Phone:', phone);
     // console.log(phone.data.slug);
     let releaseDate = phone.data.releaseDate;
-    if (releaseDate == "") {
-        releaseDate = "No Release Date Information Found";
-        console.log("No release Date Found")
+    let others = phone.data.others;
+    let bluetooth = 'No Data Found';
+    let gps = 'No Data Found';
+    let nfc = 'No Data Found';
+    let radio = 'No Data Found';
+    let usb = 'No Data Found';
+    let wlan = 'No Data Found';
+
+    if (others === undefined) {
+        others = 'No Data Found';
+        console.log('Other is undefined');
     }
-    else { releaseDate = phone.data.releaseDate; }
+
+
+    else {
+        bluetooth = phone.data.others.Bluetooth;
+        gps = phone.data.others.GPS;
+        nfc = phone.data.others.NFC;
+        radio = phone.data.others.Radio;
+        usb = phone.data.others.USB;
+        wlan = phone.data.others.WLAN;
+        console.log('Other is available');
+        others = phone.data.others;
+        // bluetooth === "" ? bluetooth = 'No Data Found' : bluetooth = phone.data.others.Bluetooth;
+    }
+    releaseDate === "" ? releaseDate = 'No Data Found' : releaseDate = phone.data.releaseDate;
 
     const div = document.createElement('div');
     div.innerHTML = `
@@ -136,7 +158,7 @@ const showPhoneDetails = phone => {
                     <td> ${releaseDate}</td>
                 </tr>
                 <tr  >
-                    <td id="mainFeatures" colspan="2">Main Featurs</td>
+                    <td class="center-text" colspan="2">Main Features</td> 
                 </tr>      
                 <tr>
                     <th>Storage</th>
@@ -158,10 +180,34 @@ const showPhoneDetails = phone => {
                     <th ">Sensors</th>
                     <td> ${phone.data.mainFeatures.sensors}</td>
                 </tr>
+                <tr  >
+                    <td class="center-text" colspan="2">Other Features</td>
+                </tr> 
                 <tr>
-                    <th ">Others</th>
-                    <td> ${phone.data.others.Bluetooth}</td>
+                    <th ">Bluetooth:</th>
+                    <td> ${bluetooth}</td>
                 </tr>
+                <tr>
+                    <th ">GPS:</th>
+                    <td> ${gps}</td>
+                </tr>
+                <tr>
+                    <th ">NFC:</th>
+                    <td> ${nfc}</td>
+                </tr>
+                <tr>
+                    <th ">Radio:</th>
+                    <td> ${radio}</td>
+                </tr>
+                <tr>
+                    <th ">USB:</th>
+                    <td> ${usb}</td>
+                </tr>
+                <tr>
+                    <th ">WLAN:</th>
+                    <td> ${wlan}</td>
+                </tr>
+               
             
 
                 </table>
@@ -170,5 +216,6 @@ const showPhoneDetails = phone => {
     
     `;
     get('phoneDetails').appendChild(div);
+
 }
 
