@@ -48,7 +48,7 @@ const showAllResult = data => {
         const div = document.createElement('div');
         div.innerHTML = `
         <div style="text-align:center" >
-        <img src="image/no-result-found.png">
+        <img width="100%" src="image/no-result-found.png">
         <div>
         `;
         get('nothing-found').appendChild(div);
@@ -83,7 +83,7 @@ const showAllResult = data => {
         clear('nothing-found');
         phones.forEach(element => {
             const div = document.createElement('div');
-            div.classList = 'col col-4';
+            div.classList = 'col col-12 col-md-4 col-sm-6';
             div.innerHTML = `
                 <div class="card h-100">
                     <img width="100%" src="${element.image}" class="m-auto p-5" alt="...">
