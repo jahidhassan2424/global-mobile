@@ -48,7 +48,7 @@ const showAllResult = data => {
         const div = document.createElement('div');
         div.innerHTML = `
         <div style="text-align:center" >
-        <img width="100%" src="image/no-result-found.png">
+        <img class="w-75 " src="image/no-result-found.png">
         <div>
         `;
         get('nothing-found').appendChild(div);
